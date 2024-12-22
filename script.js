@@ -4,19 +4,32 @@ const dqsa = (element) => document.querySelectorAll(element);
 let isCircleTurn = false;
 
 const cellElements = dqsa("[data-cell]");
+const turnMessageELement = dqs("[data-turn-message]");
 const boardElement = dqs("[data-board]");
+
+window.addEventListener("load", () => {
+    boardElement.classList.add("x");
+    turnMessageELement.classList.add("x");
+});
 
 // Marca a celular com x ou circulo (adionando a class)
 const placeMark = (cell, classToAdd) => {
     cell.classList.add(classToAdd);
 
-    boardElement.classList.remove("x");
     boardElement.classList.remove("circle");
+    boardElement.classList.remove("x");
+    turnMessageELement.classList.add("x");
 
     if (isCircleTurn) {
         boardElement.classList.add("x");
+        turnMessageELement.classList.add("x");
+        turnMessageELement.classList.remove("circle");
+        turnMessageELement.textContent = "X";
     } else {
         boardElement.classList.add("circle");
+        turnMessageELement.classList.remove("x");
+        turnMessageELement.classList.add("circle");
+        turnMessageELement.textContent = "Círculo";
     }
 };
 

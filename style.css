@@ -7,7 +7,7 @@
 
 body {
     background: linear-gradient(90deg, rgb(0, 212, 255, 1) 0%, rgb(2, 172, 67) 100%);
-    height: 100vh;
+    height: calc(100vh - 100px);
     width: 100vw;
 }
 
@@ -109,6 +109,23 @@ body {
     background-color: rgba(255, 255, 255, 0.75);
 }
 
+.turn-message p {
+    color: white;
+    font-size: 2rem;
+
+    text-align: center;
+}
+
+.turn-message p span {
+    text-decoration: underline;
+}
+
+.turn-message p span.x {
+    color: greenyellow;
+}
+.turn-message p span.circle {
+    color: cyan;
+}
 /* Winner message */
 
 /* Forçando a div ficar em cima de todos os elementos da página */
