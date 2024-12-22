@@ -27,28 +27,34 @@ const winnerCombinations = [
 ];
 
 const startGame = () => {
+    isCircleTurn = false;
+
     for (const cell of cellElements) {
-        cell.classList.remove("circle");
-        cell.classList.remove("x");
-        turnContainer.classList.remove("hidden-turn-container");
-        winnerMessage.classList.remove("show-winner-message");
-
-        cell.addEventListener("click", handleClick, { once: true }); //permitir clicar uma vez
+        cell.classList.remove("circle", "x");
+        cell.removeEventListener("click", handleClick);
+        cell.addEventListener("click", handleClick, { once: true });
     }
+    boardElement.classList.remove("circle", "x");
+    turnMessageELement.classList.remove("circle", "x");
 
+    turnMessageELement.classList.add("x");
     boardElement.classList.add("x");
     turnMessageELement.classList.add("x");
 
-    isCircleTurn = false;
+    turnMessageELement.textContent = "X";
+
+    turnContainer.classList.remove("hidden-turn-container");
+    winnerMessage.classList.remove("show-winner-message");
 };
 
 // Marca a celular com x ou circulo (adicionando a class)
 const placeMark = (cell, classToAdd) => {
     cell.classList.add(classToAdd);
 
-    boardElement.classList.remove("circle");
     boardElement.classList.remove("x");
-    turnMessageELement.classList.add("x");
+    boardElement.classList.remove("circle");
+    turnMessageELement.classList.remove("x");
+    turnMessageELement.classList.remove("circle");
 
     if (isCircleTurn) {
         boardElement.classList.add("x");
@@ -77,6 +83,13 @@ const checkForWin = (currentPlayer) => {
     });
 };
 
+const checkForDraw = () => {
+    return [...cellElements].every((cell) => {
+        //every tem que ser todos
+        return cell.classList.contains("x") || cell.classList.contains("circle");
+    });
+};
+
 //Verificar empate
 const endGame = (isDraw) => {
     if (isDraw) {
@@ -98,13 +111,19 @@ function handleClick(element) {
     // Verificar vitória
     const isWin = checkForWin(classToAdd);
 
+    // Verificar empate
+    const isDraw = checkForDraw();
+
     if (isWin) {
         endGame(false);
+    } else if (isDraw) {
+        endGame(true);
+        turnContainer.classList.add("hidden-turn-container");
+        return;
+    } else {
+        // Mudar jogador
+        swapTurns();
     }
-
-    // Verificar empate
-    // Mudar jogador
-    swapTurns();
 }
 
 startGame();
