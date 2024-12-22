@@ -113,7 +113,7 @@ body {
 
 /* Forçando a div ficar em cima de todos os elementos da página */
 .winner-message {
-    display: flex;
+    display: none;
     position: fixed;
     top: 0;
     right: 0;
