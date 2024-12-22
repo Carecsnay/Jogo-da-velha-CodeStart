@@ -1,16 +1,22 @@
 const dqs = (element) => document.querySelector(element);
 const dqsa = (element) => document.querySelectorAll(element);
 
-let isCircleTurn = false;
+let isCircleTurn;
 
 const cellElements = dqsa("[data-cell]");
 const turnMessageELement = dqs("[data-turn-message]");
 const boardElement = dqs("[data-board]");
 
-window.addEventListener("load", () => {
+const startGame = () => {
+    for (const cell of cellElements) {
+        cell.addEventListener("click", handleClick, { once: true }); //permitir clicar uma vez
+    }
+
     boardElement.classList.add("x");
     turnMessageELement.classList.add("x");
-});
+
+    isCircleTurn = false;
+};
 
 // Marca a celular com x ou circulo (adionando a class)
 const placeMark = (cell, classToAdd) => {
@@ -38,10 +44,6 @@ const swapTurns = () => {
     isCircleTurn = !isCircleTurn;
 };
 
-for (const cell of cellElements) {
-    cell.addEventListener("click", handleClick, { once: true }); //permitir clicar uma vez
-}
-
 function handleClick(element) {
     // Marcar na célula (x ou círculo)
     const cell = element.target; //target faz referencia ao elemento clicado
@@ -49,8 +51,11 @@ function handleClick(element) {
 
     placeMark(cell, classToAdd);
     // Verificar vitória
-    // Verificar empate
-    // Mudar jogador
 
+    // Verificar empate
+
+    // Mudar jogador
     swapTurns();
 }
+
+startGame();
