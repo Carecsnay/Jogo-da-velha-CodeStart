@@ -109,21 +109,21 @@ body {
     background-color: rgba(255, 255, 255, 0.75);
 }
 
-.turn-message p {
+.turn-container p {
     color: white;
     font-size: 2rem;
 
     text-align: center;
 }
 
-.turn-message p span {
+.turn-container p span {
     text-decoration: underline;
 }
 
-.turn-message p span.x {
+.turn-container p span.x {
     color: greenyellow;
 }
-.turn-message p span.circle {
+.turn-container p span.circle {
     color: cyan;
 }
 /* Winner message */
@@ -164,4 +164,12 @@ body {
 .winner-message button:hover {
     color: rgb(2, 172, 67);
     background-color: white;
+}
+
+.show-winner-message {
+    display: flex;
+}
+
+.hidden-turn-container {
+    display: none;
 }
